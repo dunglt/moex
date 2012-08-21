@@ -2,12 +2,9 @@ $(document).ready(function(){
 	menu_left = $('.left-menu-container');
 	left_part = $('.left-part-container');
 	right_part = $('.right-part-container');
+	$("#loading").show();
 	jQuery.post(ajax_link,{},
-	function(data){ 
-		jQuery("#admin-area").html(data); 
-		$("#loading").hide();
-		me_window_resize();
-	});
+	function(data){ jQuery("#admin-area").html(data); $("#loading").hide();});
 	$('#admin-area a').live('click', function(e){
 		$("#loading").show();
 		e.preventDefault();
@@ -24,9 +21,6 @@ $(document).ready(function(){
 		function(data){ jQuery("#admin-area").html(data); $("#loading").hide();});
 		me_window_resize();
 	});	
-	$(window).resize(function(){
-		window_resize();
-	});
 });
 var distance = 0;
 function getRoute(){
@@ -66,6 +60,10 @@ function me_window_resize(){
 	right_part = $('.right-part-container');
 	var max_height = Math.max(menu_left.height(), left_part.height(), right_part.height());
 	if (max_height > left_part.height() + 50) left_part.css('height',max_height);
+	window_resize();
+	$(window).resize(function(){
+		window_resize();
+	});
 }
 function window_resize(){
 	window_width = $(window).width();
